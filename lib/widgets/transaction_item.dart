@@ -19,7 +19,7 @@ class TransactionItem extends StatelessWidget {
               style: const TextStyle(fontSize: 18),
             ),
             Text(
-              "-${item.amount}",
+              "${item.amount}",
               style: const TextStyle(),
             ),
           ],

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:sistema_bancario/providers/account_provider.dart';
 import 'package:sistema_bancario/screens/account_transfer_screen.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -6,6 +8,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<AccountProvider>(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text("Sistema bancario"),
@@ -16,9 +19,12 @@ class HomeScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Column(
+              Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: [Text("Eliecer Ureche"), Text("Saldos de la cuenta")],
+                children: [
+                  Text(provider.account.accountHolder),
+                  const Text("Saldos de la cuenta")
+                ],
               ),
               const SizedBox(
                 height: 10,
@@ -31,16 +37,16 @@ class HomeScreen extends StatelessWidget {
                     children: [
                       const Text("Cuenta de Ahorro"),
                       const Text("Ahorros"),
-                      const Row(
+                      Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text("912-438383-51"),
-                          Text("Saldo disponible")
+                          Text(provider.account.accountNumber),
+                          const Text("Saldo disponible")
                         ],
                       ),
-                      const Align(
+                      Align(
                         alignment: Alignment.centerRight,
-                        child: Text("0,00"),
+                        child: Text("${provider.account.balance}"),
                       ),
                       TextButton(
                           child: const Text("Realizar movimientos."),
