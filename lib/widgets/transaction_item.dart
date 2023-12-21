@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:sistema_bancario/models/transaction.dart';
 
-class TransactionItem extends StatelessWidget {
+class TransactionItem extends StatefulWidget {
   const TransactionItem({required this.item, super.key});
 
-  final Transaction item;
+  final TransactionModel item;
 
+  @override
+  State<TransactionItem> createState() => _TransactionItemState();
+}
+
+class _TransactionItemState extends State<TransactionItem> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -15,16 +20,16 @@ class TransactionItem extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              item.date,
+              "${widget.item.date}",
               style: const TextStyle(fontSize: 18),
             ),
             Text(
-              "${item.amount}",
+              "${widget.item.amount}",
               style: const TextStyle(),
             ),
           ],
         ),
-        Text(item.description.toUpperCase()),
+        Text(widget.item.description!.toUpperCase()),
         const SizedBox(
           height: 10,
         ),

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:sistema_bancario/models/transaction.dart';
 import 'package:sistema_bancario/providers/account_provider.dart';
 import 'package:sistema_bancario/providers/transaction_provider.dart';
 
-import 'package:intl/intl.dart';
+// import 'package:intl/intl.dart';
 
 class AccountTransfer extends StatefulWidget {
   const AccountTransfer({super.key});
@@ -52,14 +53,13 @@ class _AccountTransferState extends State<AccountTransfer> {
                 style: const ButtonStyle(
                     fixedSize: MaterialStatePropertyAll(Size(400, 50))),
                 onPressed: () {
-                  providerTransaction.addTransaction(Transaction(
-                      transactionId: "",
+                  providerTransaction.addTransaction(TransactionModel(
                       description: "Transferencia realizada",
-                      amount: double.parse(textController.text),
+                      amount: int.parse(textController.text),
                       date: formatted));
 
                   providerAccount
-                      .decreaseBalance(double.parse(textController.text));
+                      .decreaseBalance(int.parse(textController.text));
 
                   Navigator.pop(context);
                 },

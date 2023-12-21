@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "881099736541",
+    "project_id": "elvale-b7da7",
+    "storage_bucket": "elvale-b7da7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:881099736541:android:f56628093e5ba627942234",
+        "android_client_info": {
+          "package_name": "com.example.sistema_bancario"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDygSPKOjFJWM_s4BT2f_V64iH0GNPnK5o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

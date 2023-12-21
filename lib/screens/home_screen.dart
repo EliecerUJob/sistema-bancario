@@ -22,7 +22,7 @@ class HomeScreen extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(provider.account.accountHolder),
+                  Text("${provider.account.accountHolder}"),
                   const Text("Saldos de la cuenta")
                 ],
               ),
@@ -40,7 +40,7 @@ class HomeScreen extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(provider.account.accountNumber),
+                          Text("${provider.account.accountNumber}"),
                           const Text("Saldo disponible")
                         ],
                       ),
