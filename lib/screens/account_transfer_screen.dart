@@ -19,10 +19,9 @@ class _AccountTransferState extends State<AccountTransfer> {
 
   @override
   Widget build(BuildContext context) {
-    final providerTransaction =
-        Provider.of<TransactionProvider>(context, listen: false);
-    final providerAccount =
-        Provider.of<AccountProvider>(context, listen: false);
+    final providerTransaction = Provider.of<TransactionProvider>(context);
+
+    final providerAccount = Provider.of<AccountProvider>(context);
 
     final DateTime now = DateTime.now();
     final DateFormat formatter = DateFormat('yyyy-MM-dd');
@@ -38,7 +37,6 @@ class _AccountTransferState extends State<AccountTransfer> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Text("Ingresa valor a transferir"),
             Form(
                 child: TextFormField(
               controller: textController,
@@ -58,8 +56,8 @@ class _AccountTransferState extends State<AccountTransfer> {
                       amount: int.parse(textController.text),
                       date: formatted));
 
-                  providerAccount
-                      .decreaseBalance(int.parse(textController.text));
+                  providerAccount.decreaseBalance(
+                      int.parse(textController.text), "SgAVkT6mCZgN59qxNoMA");
 
                   Navigator.pop(context);
                 },

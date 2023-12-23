@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sistema_bancario/providers/account_provider.dart';
 import 'package:sistema_bancario/providers/transaction_provider.dart';
+import 'package:sistema_bancario/screens/login_screen.dart';
 import 'package:sistema_bancario/screens/navigation_bar_init.dart';
 
 class MyApp extends StatelessWidget {
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
         ),
         darkTheme: ThemeData(brightness: Brightness.dark, useMaterial3: true),
-        home: const NavigationBarInit(),
+        home: const LoginScreen(),
       ),
     );
   }

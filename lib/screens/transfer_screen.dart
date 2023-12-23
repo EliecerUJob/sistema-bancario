@@ -40,7 +40,9 @@ class _TransferScreenState extends State<TransferScreen> {
                   itemBuilder: (context, index) =>
                       TransactionItem(item: transactions[index]));
             } else {
-              return const Text("Buscando");
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
             }
           },
         ),

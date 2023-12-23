@@ -1,70 +1,64 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sistema_bancario/models/account.dart';
 import 'package:sistema_bancario/providers/account_provider.dart';
-import 'package:sistema_bancario/screens/account_transfer_screen.dart';
+import 'package:sistema_bancario/widgets/account_card.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  AccountModel account = AccountModel();
 
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<AccountProvider>(context);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Sistema bancario"),
       ),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text("${provider.account.accountHolder}"),
-                  const Text("Saldos de la cuenta")
-                ],
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Card(
+      body: StreamBuilder<Object>(
+          stream: provider.fethAccountAsStream(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              provider.getAccountById("SgAVkT6mCZgN59qxNoMA").then((value) {
+                account = AccountModel(
+                    accountNumber: value.accountNumber,
+                    accountHolder: value.accountHolder,
+                    balance: value.balance);
+              });
+              return Center(
                 child: Padding(
-                  padding: const EdgeInsets.all(15.0),
+                  padding: const EdgeInsets.all(20.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text("Cuenta de Ahorro"),
-                      const Text("Ahorros"),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("${provider.account.accountNumber}"),
-                          const Text("Saldo disponible")
+                          Text("${account.accountHolder}"),
+                          const Text("Saldos de la cuenta")
                         ],
                       ),
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: Text("${provider.account.balance}"),
+                      const SizedBox(
+                        height: 10,
                       ),
-                      TextButton(
-                          child: const Text("Realizar movimientos."),
-                          onPressed: () => Navigator.push(
-                              context,
-                              PageRouteBuilder(
-                                pageBuilder:
-                                    (context, animation, secondaryAnimation) =>
-                                        const AccountTransfer(),
-                              ))),
+                      CardWidget(data: account)
                     ],
                   ),
                 ),
-              ),
-            ],
-          ),
-        ),
-      ),
+              );
+            } else {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+          }),
     );
   }
 }
